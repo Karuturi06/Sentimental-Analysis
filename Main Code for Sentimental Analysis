@@ -1,0 +1,30 @@
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+nltk.download('vader_lexicon')
+
+def analyze_sentiment(text):
+    sid = SentimentIntensityAnalyzer()
+    sentiment_scores = sid.polarity_scores(text)
+
+    if sentiment_scores['compound'] >= 0.05:
+        return 'Positive'
+    elif sentiment_scores['compound'] <= -0.05:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+def main():
+    while True:
+        user_text = input("Enter text for sentiment analysis (type 'exit' to end): ")
+        
+        if user_text.lower() == 'exit':
+            print("Thank you for using this app please vist again")
+            print("Exiting the sentiment analysis botexit. Goodbye!")
+            break
+
+        sentiment = analyze_sentiment(user_text)
+        print(f'Sentiment: {sentiment}\n')
+
+if _name_ == "_main_":
+    main()
